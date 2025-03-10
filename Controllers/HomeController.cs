@@ -12,8 +12,8 @@ namespace EmployeeManagementPortal.Controllers
         readonly DatabaseConnector connector = new DatabaseConnector();
         public ActionResult Index()
         {
-            var employeeDetails = connector.Employees.FirstOrDefault();
-            return View(employeeDetails);
+            var departmentDetails = connector.Employees.FirstOrDefault();
+            return View(departmentDetails);
         }
 
         public ActionResult About()

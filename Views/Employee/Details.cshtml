@@ -1,0 +1,82 @@
+﻿@*@model EmployeeManagementPortal.Models.Employee*@
+@model IEnumerable<EmployeeManagementPortal.Models.Employee>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+
+    #employees {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        #employees td, #employees th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #employees tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #employees tr:hover {
+            background-color: #ddd;
+        }
+
+        #employees th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+    h2 {
+        text-align: center;
+    }
+</style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+
+    @Html.ActionLink("Create", "Create")
+
+    <table id="employees">
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Department.Department_Name)</th>
+            <th> @Html.DisplayNameFor(model => model.Job.Job_Title)</th>
+            <th> @Html.DisplayNameFor(model => model.First_Name)</th>
+            <th> @Html.DisplayNameFor(model => model.Last_Name)</th>
+            <th> @Html.DisplayNameFor(model => model.Gender)</th>
+            <th> @Html.DisplayNameFor(model => model.Email)</th>
+            <th> @Html.DisplayNameFor(model => model.Photo_Url)</th>
+            <th>Crud Operations</th>
+        </tr>
+
+
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Department.Department_Name</td>
+                <td>@employee.Job.Job_Title</td>
+                <td>@employee.First_Name</td>
+                <td>@employee.Last_Name</td>
+                <td>@employee.Gender</td>
+                <td>@employee.Email</td>
+                <td>@employee.Photo_Url</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = employee.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = employee.Id })
+                </td>
+            </tr>
+        }
+    </table>
+    
