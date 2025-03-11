@@ -1,0 +1,82 @@
+﻿@model EmployeeManagementPortal.Models.ViewModels.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Employee Details";
+}
+
+<h2>Employee Details</h2>
+
+<div>
+    <h4>@Model.First_Name @Model.Last_Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Employee ID</dt>
+        <dd>@Model.Employee_Id</dd>
+        <dt>Email</dt>
+        <dd>@Model.Email</dd>
+        <dt>Photo</dt>
+        <dd>
+            @*@Url.Content(Model.Photo_Url)*@
+            @if (!string.IsNullOrEmpty(Model.Photo_Url))
+            {
+                <img src="@Url.Content(Model.Photo_Url)" alt="Employee Photo" style="width:150px;height:auto;" />
+            }
+            else
+            {
+                <p>No photo available.</p>
+            }
+        </dd>
+    </dl>
+
+    <h4>Salaries</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Salary Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var salary in Model.Salaries)
+            {
+                <tr>
+                    <td>@salary.Salary_Date.ToShortDateString()</td>
+                    <td>@salary.Amount.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Leaves</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Leave ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var leave in Model.Leaves)
+            {
+                <tr>
+                    <td>@leave.Id</td>
+                    <td>@leave.Leave_Date.ToShortDateString()</td>    
+                    <td>@leave.Reason</td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", "Leave", new { id = leave.Id, employeeId = Model.Employee_Id }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Edit", "Edit", "Leave", new { id = leave.Id, employeeId = Model.Employee_Id }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Add Leave</h4>
+</div>
+
+<div>
+    @Html.ActionLink("Add-Leave", "Create", "Leave", new { id = Model.Employee_Id }, new { @class = "btn btn-default" })
+</div>

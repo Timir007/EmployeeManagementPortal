@@ -1,0 +1,77 @@
+﻿@*@model EmployeeManagementPortal.Models.Employee*@
+@model IEnumerable<EmployeeManagementPortal.Models.SalarySlip>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+
+    #salarySlips {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        #salarySlips td, #salarySlips th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #salarySlips tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #salarySlips tr:hover {
+            background-color: #ddd;
+        }
+
+        #salarySlips th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+    h2 {
+        text-align: center;
+    }
+</style>
+
+<h2>Details</h2>
+
+
+    <h4>Salary Slips</h4>
+    <hr />
+
+    <table id="salarySlips">
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Id)</th>
+            <th> @Html.DisplayNameFor(model => model.Salary_Date)</th>
+            <th> @Html.DisplayNameFor(model => model.Amount)</th>
+            <th> @Html.DisplayNameFor(model => model.Employee_Id)</th>
+            <th>Crud Operations</th>
+            <th> View</th>
+        </tr>
+
+
+        @foreach (var salarySlip in Model)
+        {
+            <tr>
+                <td>@salarySlip.Id</td>
+                <td>@salarySlip.Salary_Date</td>
+                <td>@salarySlip.Amount</td>
+                <td>@salarySlip.Employee_Id</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = salarySlip.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = salarySlip.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Read", "Detail", new { id = salarySlip.Id })
+                </td>
+            </tr>
+        }
+    </table>

@@ -43,7 +43,7 @@
 
 <h2>Details</h2>
 
-<div>
+<div class="d-flex flex-column justify-content-center align-items-center me-4">
     <h4>Employee</h4>
     <hr />
 
@@ -59,6 +59,7 @@
             <th> @Html.DisplayNameFor(model => model.Email)</th>
             <th> @Html.DisplayNameFor(model => model.Photo_Url)</th>
             <th>Crud Operations</th>
+            <th> View</th>
         </tr>
 
 
@@ -76,7 +77,12 @@
                     @Html.ActionLink("Edit", "Edit", new { id = employee.Id })
                     @Html.ActionLink("Delete", "Delete", new { id = employee.Id })
                 </td>
+                <td>
+                    @Html.ActionLink("Read", "Detail", new { id = employee.Id })
+                </td>
             </tr>
         }
     </table>
+
+    </div>
     

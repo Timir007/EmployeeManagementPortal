@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -50,10 +50,12 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Photo_Url, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Photo_Url, new { htmlAttributes = new { @class = "form-control" } })
+            <input type="file" name="Photo_Url" class="form-control" />
             @Html.ValidationMessageFor(model => model.Photo_Url, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
 
     <div class="form-group border">
         @Html.LabelFor(model => model.Department_Id, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,14 +89,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
 }
 
-
-
-@*<div class="form-group">
-    @Html.LabelFor(model => model.Job_Id, "Job_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownList("Job_Id", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Job_Id, "", new { @class = "text-danger" })
-    </div>
-</div>*@
