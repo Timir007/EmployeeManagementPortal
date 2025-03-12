@@ -67,6 +67,7 @@ namespace EmployeeManagementPortal.Controllers
         public ActionResult Details()
         {
             var employeeDetail = _context.Employees.ToList();
+
             return View(employeeDetail);
         }
 

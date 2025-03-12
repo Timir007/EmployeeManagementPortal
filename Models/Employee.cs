@@ -24,8 +24,8 @@ namespace EmployeeManagementPortal.Models
         public string Photo_Url { get; set; }
 
 
-        public int Department_Id { get; set; }
-        public int Job_Id { get; set; }
+        public int? Department_Id { get; set; }
+        public int? Job_Id { get; set; }
 
         [ForeignKey("Department_Id")]
         public virtual Department Department { get; set; }

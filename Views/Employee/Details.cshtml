@@ -61,12 +61,23 @@
             <th>Crud Operations</th>
             <th> View</th>
         </tr>
-
+        
 
         @foreach (var employee in Model)
         {
-            <tr>
-                <td>@employee.Department.Department_Name</td>
+
+
+         <tr>
+                <td>
+                    @if (employee.Department_Id == null)
+                        {
+                            <p class="text-danger">Not Assigned</p>
+                        }
+                        else
+                        {
+                        @employee.Department.Department_Name
+                        }
+                </td>
                 <td>@employee.Job.Job_Title</td>
                 <td>@employee.First_Name</td>
                 <td>@employee.Last_Name</td>

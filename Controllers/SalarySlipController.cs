@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EmployeeManagementPortal.Models;
 
 namespace EmployeeManagementPortal.Controllers
 {
@@ -14,6 +16,32 @@ namespace EmployeeManagementPortal.Controllers
         {
             _context = new DatabaseConnector();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(SalarySlip salarySlip)
+        {
+            if (!_context.Employees.Any(e => e.Id == salarySlip.Employee_Id))
+            {
+                ModelState.AddModelError("Employee_Id", "Employee Doesn't Exists!!!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.SalarySlips.Add(salarySlip);
+                _context.SaveChanges();
+                return RedirectToAction("Details");
+            }
+            return View(salarySlip);
+        }
+
+
         [HttpGet]
         public ActionResult Details()
         {
@@ -21,16 +49,65 @@ namespace EmployeeManagementPortal.Controllers
             return View(salarySlipDetail);
         }
 
-        //public ActionResult Edit(int id)
-        //{
-        //    var employee = _context.Employees.Find(id);
-        //    if (employee == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var salarySlip = _context.SalarySlips.Find(id);
+            if (salarySlip == null)
+            {
+                return HttpNotFound();
+            }
 
-        //    ViewBag.Departments = _context.Departments.ToList();
-        //    return View(employee);
-        //}
+            return View(salarySlip);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, SalarySlip salarySlip)
+        {
+
+            var modelSalarySlip = _context.SalarySlips.Find(id);
+            if (modelSalarySlip == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                modelSalarySlip.Salary_Date = salarySlip.Salary_Date;
+                modelSalarySlip.Amount = salarySlip.Amount;
+
+                _context.Entry(modelSalarySlip).State = System.Data.Entity.EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("Detail", "Employee", new { id = modelSalarySlip.Employee_Id });
+            }
+
+            return View(modelSalarySlip);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var salarySlip = _context.SalarySlips.Find(id);
+            if (salarySlip == null)
+            {
+                return HttpNotFound();
+            }
+            return View(salarySlip);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var salarySlip = _context.SalarySlips.Find(id);
+            if (salarySlip == null)
+            {
+                return HttpNotFound();
+            }
+
+            _context.SalarySlips.Remove(salarySlip);
+            _context.SaveChanges();
+            return RedirectToAction("Details");
+        }
     }
 }

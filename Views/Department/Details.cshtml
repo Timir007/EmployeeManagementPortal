@@ -1,5 +1,5 @@
 ﻿@*@model EmployeeManagementPortal.Models.Employee*@
-@model IEnumerable<EmployeeManagementPortal.Models.SalarySlip>
+@model IEnumerable<EmployeeManagementPortal.Models.Department>
 
 @{
     ViewBag.Title = "Details";
@@ -50,23 +50,20 @@
 <table id="salarySlips">
     <tr>
         <th> @Html.DisplayNameFor(model => model.Id)</th>
-        <th> @Html.DisplayNameFor(model => model.Salary_Date)</th>
-        <th> @Html.DisplayNameFor(model => model.Amount)</th>
-        <th> @Html.DisplayNameFor(model => model.Employee_Id)</th>
+        <th> @Html.DisplayNameFor(model => model.Department_Name)</th>
         <th>Crud Operations</th>
     </tr>
 
 
-    @foreach (var salarySlip in Model)
+    @foreach (var department in Model)
     {
         <tr>
-            <td>@salarySlip.Id</td>
-            <td>@salarySlip.Salary_Date</td>
-            <td>@salarySlip.Amount</td>
-            <td>@salarySlip.Employee_Id</td>
+            <td>@department.Id</td>
+            <td>@department.Department_Name</td>
+
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = salarySlip.Id })
-                @Html.ActionLink("Delete", "Delete", new { id = salarySlip.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = department.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = department.Id })
             </td>
         </tr>
     }

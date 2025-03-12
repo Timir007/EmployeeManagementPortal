@@ -208,10 +208,16 @@
     <Content Include="Views\Leave\Delete.cshtml" />
     <Content Include="Views\Leave\Edit.cshtml" />
     <Content Include="Views\SalarySlip\Details.cshtml" />
+    <Content Include="Views\SalarySlip\Create.cshtml" />
+    <Content Include="Views\SalarySlip\Edit.cshtml" />
+    <Content Include="Views\SalarySlip\Delete.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\Details.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Department\" />
     <Folder Include="Views\Job\" />
   </ItemGroup>
   <ItemGroup>
